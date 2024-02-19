@@ -95,21 +95,21 @@ applyBtn.addEventListener("click", function() {
   const couponElement = document.getElementById("input-field").value;
   const couponCodeEntered = couponElement.trim();
   
-  // Check if the coupon code matches "NEW15" or "COUPLE 20"
+  // matches "NEW15" or "COUPLE 20"
   if (couponCodeEntered === "NEW15" || couponCodeEntered === "Couple 20") {
-    // Check if only one seat is selected or fewer than 5 seats are selected
+    // Check less 4
     const selectedSeatsCount = parseInt(document.getElementById("selected-seats-count").innerText);
     if (selectedSeatsCount >= 4) {
-      // Apply the discount
+      // Apply discount
       const totalPriceElement = document.getElementById("total-price");
       let totalPriceOk  = parseInt(totalPriceElement.innerText);
       let discount = 0;
 
       if (couponCodeEntered === "NEW15") {
-        // Apply 15% discount for "NEW15"
+        // Apply 15
         discount = totalPriceOk * 0.15;
       } else if (couponCodeEntered === "Couple 20") {
-        // Apply $20 discount for "COUPLE 20"
+        // Apply 20
         discount = totalPriceOk * 0.20;
         // discount = 20;
       }
