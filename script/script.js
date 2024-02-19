@@ -136,7 +136,7 @@ applyBtn.addEventListener("click", function() {
   // }
 
   // Get the value from the input field
-  const couponElement = document.getElementById("input-field");
+  const couponElement = document.getElementById("input-field").value;
   const couponCodeEntered = couponElement.trim();
   
   // Check if the coupon code matches "NEW15" or "COUPLE 20"
