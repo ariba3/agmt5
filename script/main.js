@@ -18,124 +18,128 @@ let SeatLeft =totalSeat;
 
 const kbds = document.querySelectorAll(".kbd")
 //console.log(kbds);
-
+const maxSeats = 4; 
 for (let index = 0; index < kbds.length; index++) {
   const kbd = kbds[index];
-  //console.log(kbd)
-  kbd.addEventListener("click", function(){
-    //console.log("clicked")
+  kbd.addEventListener("click", function() {
+    if (ticketClickCount < maxSeats) { // Check if maximum seats limit is not reached
+      ticketClickCount++;
+      document.getElementById("selected-seats-count").innerText = ticketClickCount;
 
-    ticketClickCount++;
+      // seat left
+      if (SeatLeft > 0) {
+        selectSeat++;
+        document.getElementById("selected-seats-count").innerText = selectSeat;
+        SeatLeft--;
+        document.getElementById("seatsLeft").innerText = SeatLeft;
+        kbd.style.backgroundColor = "green";
+      } else {
+        alert("No seats left");
+      }
 
-    document.getElementById("selected-seats-count").innerText = ticketClickCount;
+      // seat number get
+      const title = kbd.querySelector("h4").innerText;
 
+      // price
+      const price = parseInt(kbd.querySelector("span").innerText.split(" ")[0]);
 
-    // seat left
-    if(SeatLeft >0){
-      selectSeat++;
-      document.getElementById("selected-seats-count").innerText= selectSeat;
-      SeatLeft--;
-      document.getElementById("seatsLeft").innerText=SeatLeft;
+      const titleContainer = document.getElementById("title-container");
+      const p = document.createElement("p");
+      p.innerText = title;
+      titleContainer.appendChild(p);
 
-      kbd.style.backgroundColor = "green";
-    }else{
-      alert("no seats left")
+      const titleEcoContainer = document.getElementById("title-eco");
+      const pClass = document.createElement("p");
+      pClass.innerText = "economy";
+      pClass.classList.add("class");
+      titleEcoContainer.appendChild(pClass);
+
+      const priceContainer = document.getElementById("price-container");
+      const pPrice = document.createElement("p");
+      pPrice.innerText = price;
+      priceContainer.appendChild(pPrice);
+
+      // price
+      totalPrice += price;
+      document.getElementById("total-price").innerText = totalPrice;
+    } else {
+      alert("Maximum number of seats selected!");
     }
-
-
-
-    // seat number get
-    const title = kbd.querySelector("h4").innerText;
-    // console.log(title.innerText);
-
-
-    // prince
-    const price = parseInt(kbd.querySelector("span").innerText.split(" ")[0]);
-   // console.log(price)
-    //console.log(title, price.innerHTML);
-
-    const titleContainer =document.getElementById("title-container");
-
-    const p = document.createElement("p");
-    p.innerText =title  ;
-    // p.innerText =title + " " + "economy" +" " + price ;
-    titleContainer.appendChild(p)
-
-    const titleEcoContainer = document.getElementById("title-eco");
-    const pClass = document.createElement("p");
-    pClass.innerText = "economy";
-    pClass.classList.add("class");
-    titleEcoContainer.appendChild(pClass);
-
-    const priceContainer = document.getElementById("price-container");
-    const pPrice = document.createElement("p");
-    pPrice.innerText = price;
-    priceContainer.appendChild(pPrice);
-
-    // const titleContainer2 =document.getElementById("title-eco");
-
-    // const h4= document.createElementById("h4");
-    // h4.innerText= "economy";
-    // titleContainer2.appendChild(h4)
-
-
-    // price
-    totalPrice+= price;
-    //console.log(totalPrice);
-    document.getElementById("total-price").innerText= totalPrice;
-
-
   });
 }
 
-// Define the constant for the coupon code
-// const couponCode = "NEW15";
+// for (let index = 0; index < kbds.length; index++) {
+//   const kbd = kbds[index];
+//   //console.log(kbd)
+//   kbd.addEventListener("click", function(){
+//     //console.log("clicked")
 
-// // Define the event listener for the Apply button
-// const applyBtn = document.getElementById("apply-btn");
-// applyBtn.addEventListener("click", function() {
-//   // Get the value from the input field
-//   const couponElement = document.getElementById("input-field").value;
-//   const couponCodeEntered = couponElement.trim();
-  
-//   // Check if the coupon code matches
-//   if (couponCodeEntered === couponCode) {
-//     // Check if only one seat is selected or fewer than 5 seats are selected
-//     const selectedSeatsCount = parseInt(document.getElementById("selected-seats-count").innerText);
-//     if (selectedSeatsCount <! 4 || selectedSeatsCount < 5) {
-//       // Apply the discount
-//       const totalPriceElement = document.getElementById("total-price");
-//       let totalPriceOk  = parseInt(totalPriceElement.innerText);
-//       // Apply 15% discount
-//       const discount = totalPriceOk * 0.15;
-//       totalPriceOk -= discount;
-      
-//       // Update the total price display
-//      // totalPriceElement.innerText = totalPriceOk;
+//     ticketClickCount++;
 
-//       // Update the grand total
-//       document.getElementById("grand-total").innerText = totalPriceOk;
-//     } else {
-//       alert("The coupon is not applicable because more than one seat is selected and there are 5 or more seats selected.");
+//     document.getElementById("selected-seats-count").innerText = ticketClickCount;
+
+
+//     // seat left
+//     if(SeatLeft >0){
+//       selectSeat++;
+//       document.getElementById("selected-seats-count").innerText= selectSeat;
+//       SeatLeft--;
+//       document.getElementById("seatsLeft").innerText=SeatLeft;
+
+//       kbd.style.backgroundColor = "green";
+//     }else{
+//       alert("no seats left")
 //     }
-//   } else {
-//     alert("Invalid coupon code. Please enter the correct coupon code.");
-//   }
-// });
 
 
-// let couponApplied = false;
-// Define the event listener for the Apply button
+
+//     // seat number get
+//     const title = kbd.querySelector("h4").innerText;
+//     // console.log(title.innerText);
+
+
+//     // prince
+//     const price = parseInt(kbd.querySelector("span").innerText.split(" ")[0]);
+//    // console.log(price)
+//     //console.log(title, price.innerHTML);
+
+//     const titleContainer =document.getElementById("title-container");
+
+//     const p = document.createElement("p");
+//     p.innerText =title  ;
+//     // p.innerText =title + " " + "economy" +" " + price ;
+//     titleContainer.appendChild(p)
+
+//     const titleEcoContainer = document.getElementById("title-eco");
+//     const pClass = document.createElement("p");
+//     pClass.innerText = "economy";
+//     pClass.classList.add("class");
+//     titleEcoContainer.appendChild(pClass);
+
+//     const priceContainer = document.getElementById("price-container");
+//     const pPrice = document.createElement("p");
+//     pPrice.innerText = price;
+//     priceContainer.appendChild(pPrice);
+
+//     // const titleContainer2 =document.getElementById("title-eco");
+
+//     // const h4= document.createElementById("h4");
+//     // h4.innerText= "economy";
+//     // titleContainer2.appendChild(h4)
+
+
+//     // price
+//     totalPrice+= price;
+//     //console.log(totalPrice);
+//     document.getElementById("total-price").innerText= totalPrice;
+
+
+//   });
+// }
+
 const applyBtn = document.getElementById("apply-btn");
 applyBtn.addEventListener("click", function() {
 
-
-  // if (couponApplied) {
-  //   alert("Only one coupon can be applied.");
-  //   return; // Exit the function early if a coupon has already been applied
-  // }
-
-  // Get the value from the input field
   const couponElement = document.getElementById("input-field").value;
   const couponCodeEntered = couponElement.trim();
   
@@ -159,9 +163,7 @@ applyBtn.addEventListener("click", function() {
       }
 
       totalPriceOk -= discount;
-      
-      // Update the total price display
-      //totalPriceElement.innerText = totalPriceOk;
+    
 
       // Update the grand total
       document.getElementById("grand-total").innerText = totalPriceOk;
