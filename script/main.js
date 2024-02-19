@@ -19,123 +19,75 @@ let SeatLeft =totalSeat;
 const kbds = document.querySelectorAll(".kbd")
 //console.log(kbds);
 const maxSeats = 4; 
+
 for (let index = 0; index < kbds.length; index++) {
   const kbd = kbds[index];
-  kbd.addEventListener("click", function() {
-    if (ticketClickCount < maxSeats) { // Check if maximum seats limit is not reached
-      ticketClickCount++;
-      document.getElementById("selected-seats-count").innerText = ticketClickCount;
+  //console.log(kbd)
+  kbd.addEventListener("click", function(){
+    //console.log("clicked")
 
-      // seat left
-      if (SeatLeft > 0) {
-        selectSeat++;
-        document.getElementById("selected-seats-count").innerText = selectSeat;
-        SeatLeft--;
-        document.getElementById("seatsLeft").innerText = SeatLeft;
-        kbd.style.backgroundColor = "green";
-      } else {
-        alert("No seats left");
-      }
+    ticketClickCount++;
 
-      // seat number get
-      const title = kbd.querySelector("h4").innerText;
+    document.getElementById("selected-seats-count").innerText = ticketClickCount;
 
-      // price
-      const price = parseInt(kbd.querySelector("span").innerText.split(" ")[0]);
 
-      const titleContainer = document.getElementById("title-container");
-      const p = document.createElement("p");
-      p.innerText = title;
-      titleContainer.appendChild(p);
+    // seat left
+    if(SeatLeft >0){
+      selectSeat++;
+      document.getElementById("selected-seats-count").innerText= selectSeat;
+      SeatLeft--;
+      document.getElementById("seatsLeft").innerText=SeatLeft;
 
-      const titleEcoContainer = document.getElementById("title-eco");
-      const pClass = document.createElement("p");
-      pClass.innerText = "economy";
-      pClass.classList.add("class");
-      titleEcoContainer.appendChild(pClass);
-
-      const priceContainer = document.getElementById("price-container");
-      const pPrice = document.createElement("p");
-      pPrice.innerText = price;
-      priceContainer.appendChild(pPrice);
-
-      // price
-      totalPrice += price;
-      document.getElementById("total-price").innerText = totalPrice;
-    } else {
-      alert("Maximum number of seats selected!");
+      kbd.style.backgroundColor = "green";
+    }else{
+      alert("no seats left")
     }
+
+
+
+    // seat number get
+    const title = kbd.querySelector("h4").innerText;
+    // console.log(title.innerText);
+
+
+    // prince
+    const price = parseInt(kbd.querySelector("span").innerText.split(" ")[0]);
+   // console.log(price)
+    //console.log(title, price.innerHTML);
+
+    const titleContainer =document.getElementById("title-container");
+
+    const p = document.createElement("p");
+    p.innerText =title  ;
+    // p.innerText =title + " " + "economy" +" " + price ;
+    titleContainer.appendChild(p)
+
+    const titleEcoContainer = document.getElementById("title-eco");
+    const pClass = document.createElement("p");
+    pClass.innerText = "economy";
+    pClass.classList.add("class");
+    titleEcoContainer.appendChild(pClass);
+
+    const priceContainer = document.getElementById("price-container");
+    const pPrice = document.createElement("p");
+    pPrice.innerText = price;
+    priceContainer.appendChild(pPrice);
+
+    // const titleContainer2 =document.getElementById("title-eco");
+
+    // const h4= document.createElementById("h4");
+    // h4.innerText= "economy";
+    // titleContainer2.appendChild(h4)
+
+
+    // price
+    totalPrice+= price;
+    //console.log(totalPrice);
+    document.getElementById("total-price").innerText= totalPrice;
+
+
   });
 }
-
-// for (let index = 0; index < kbds.length; index++) {
-//   const kbd = kbds[index];
-//   //console.log(kbd)
-//   kbd.addEventListener("click", function(){
-//     //console.log("clicked")
-
-//     ticketClickCount++;
-
-//     document.getElementById("selected-seats-count").innerText = ticketClickCount;
-
-
-//     // seat left
-//     if(SeatLeft >0){
-//       selectSeat++;
-//       document.getElementById("selected-seats-count").innerText= selectSeat;
-//       SeatLeft--;
-//       document.getElementById("seatsLeft").innerText=SeatLeft;
-
-//       kbd.style.backgroundColor = "green";
-//     }else{
-//       alert("no seats left")
-//     }
-
-
-
-//     // seat number get
-//     const title = kbd.querySelector("h4").innerText;
-//     // console.log(title.innerText);
-
-
-//     // prince
-//     const price = parseInt(kbd.querySelector("span").innerText.split(" ")[0]);
-//    // console.log(price)
-//     //console.log(title, price.innerHTML);
-
-//     const titleContainer =document.getElementById("title-container");
-
-//     const p = document.createElement("p");
-//     p.innerText =title  ;
-//     // p.innerText =title + " " + "economy" +" " + price ;
-//     titleContainer.appendChild(p)
-
-//     const titleEcoContainer = document.getElementById("title-eco");
-//     const pClass = document.createElement("p");
-//     pClass.innerText = "economy";
-//     pClass.classList.add("class");
-//     titleEcoContainer.appendChild(pClass);
-
-//     const priceContainer = document.getElementById("price-container");
-//     const pPrice = document.createElement("p");
-//     pPrice.innerText = price;
-//     priceContainer.appendChild(pPrice);
-
-//     // const titleContainer2 =document.getElementById("title-eco");
-
-//     // const h4= document.createElementById("h4");
-//     // h4.innerText= "economy";
-//     // titleContainer2.appendChild(h4)
-
-
-//     // price
-//     totalPrice+= price;
-//     //console.log(totalPrice);
-//     document.getElementById("total-price").innerText= totalPrice;
-
-
-//   });
-// }
 
 const applyBtn = document.getElementById("apply-btn");
 applyBtn.addEventListener("click", function() {
@@ -147,7 +99,7 @@ applyBtn.addEventListener("click", function() {
   if (couponCodeEntered === "NEW15" || couponCodeEntered === "Couple 20") {
     // Check if only one seat is selected or fewer than 5 seats are selected
     const selectedSeatsCount = parseInt(document.getElementById("selected-seats-count").innerText);
-    if (selectedSeatsCount <= 1 || selectedSeatsCount < 5) {
+    if (selectedSeatsCount >= 4) {
       // Apply the discount
       const totalPriceElement = document.getElementById("total-price");
       let totalPriceOk  = parseInt(totalPriceElement.innerText);
@@ -175,7 +127,7 @@ applyBtn.addEventListener("click", function() {
 
       // couponApplied = true;
     } else {
-      alert("The coupon is not applicable because more than one seat is selected or there are 5 or more seats selected.");
+      alert("The coupon is not applicable because less than four seat is selected ");
     }
   } else {
     alert("Invalid coupon code. Please enter the correct coupon code.");
