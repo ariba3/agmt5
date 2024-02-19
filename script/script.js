@@ -140,7 +140,7 @@ applyBtn.addEventListener("click", function() {
   const couponCodeEntered = couponElement.trim();
   
   // Check if the coupon code matches "NEW15" or "COUPLE 20"
-  if (couponCodeEntered === "NEW15" || couponCodeEntered === "COUPLE 20") {
+  if (couponCodeEntered === "NEW15" || couponCodeEntered === "Couple 20") {
     // Check if only one seat is selected or fewer than 5 seats are selected
     const selectedSeatsCount = parseInt(document.getElementById("selected-seats-count").innerText);
     if (selectedSeatsCount <= 1 || selectedSeatsCount < 5) {
@@ -152,9 +152,10 @@ applyBtn.addEventListener("click", function() {
       if (couponCodeEntered === "NEW15") {
         // Apply 15% discount for "NEW15"
         discount = totalPriceOk * 0.15;
-      } else if (couponCodeEntered === "COUPLE 20") {
+      } else if (couponCodeEntered === "Couple 20") {
         // Apply $20 discount for "COUPLE 20"
-        discount = 20;
+        discount = totalPriceOk * 0.20;
+        // discount = 20;
       }
 
       totalPriceOk -= discount;
@@ -165,8 +166,10 @@ applyBtn.addEventListener("click", function() {
       // Update the grand total
       document.getElementById("grand-total").innerText = totalPriceOk;
 
-      couponElement.style.display = "none";
+      // couponElement.style.display = "none";
 
+      const inputField = document.getElementById('hide');
+      inputField.style.display = 'none';
 
       // couponApplied = true;
     } else {
@@ -178,20 +181,4 @@ applyBtn.addEventListener("click", function() {
 });
 
 
-
-
-// const btn =document.getElementById("apply-btn");
-// // console.log(btn)
-
-// btn.addEventListener("click", function(){
-
-//  // console.log("clickeddd")
-
-//   // get value from cupon
-//   const couponElement = document.getElementById("input-field").value;
-//   const cuponCode =couponElement.split(" ")
-//   // input thek a value nile .value
-//   //console.log(couponElement.value)
-//   if()
-// })
 
